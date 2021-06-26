@@ -7,7 +7,7 @@ using System.Threading.Tasks;
 
 namespace HRPotralAPI.Repositories.EmployeeRepository
 {
-    public class EmployeeRepository : IEmployeeRepository
+    public class EmployeeRepository : IRepository<Employee>
     {
         private DBManager dBManager;
         public EmployeeRepository(DBManager dbManager)

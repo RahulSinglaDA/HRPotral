@@ -1,5 +1,5 @@
 ﻿using HRPotralAPI.Models;
-using HRPotralAPI.Repositories.DepartmentRepository;
+using HRPotralAPI.Repositories;
 using Microsoft.AspNetCore.Mvc;
 using System;
 using System.Collections.Generic;
@@ -15,8 +15,8 @@ namespace HRPotralAPI.Controllers
     public class DepartmentController : ControllerBase
     {
 
-        private IDepartmentRepository depRep;
-        public DepartmentController(IDepartmentRepository departmentRepository)
+        private IRepository<Department> depRep;
+        public DepartmentController(IRepository<Department> departmentRepository)
         {
             depRep = departmentRepository;
         }

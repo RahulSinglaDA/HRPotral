@@ -1,5 +1,5 @@
 ﻿using HRPotralAPI.Models;
-using HRPotralAPI.Repositories.EmployeeRepository;
+using HRPotralAPI.Repositories;
 using Microsoft.AspNetCore.Mvc;
 using System;
 using System.Collections.Generic;
@@ -13,8 +13,8 @@ namespace HRPotralAPI.Controllers
     [ApiController]
     public class EmployeeController : ControllerBase
     {
-        private IEmployeeRepository empRep;
-        public EmployeeController(IEmployeeRepository employeeRepository)
+        private IRepository<Employee> empRep;
+        public EmployeeController(IRepository<Employee> employeeRepository)
         {
             empRep = employeeRepository;
         }

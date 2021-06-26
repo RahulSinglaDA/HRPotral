@@ -1,4 +1,6 @@
 using HRPotralAPI.DBManagers;
+using HRPotralAPI.Models;
+using HRPotralAPI.Repositories;
 using HRPotralAPI.Repositories.DepartmentRepository;
 using HRPotralAPI.Repositories.EmployeeRepository;
 using Microsoft.AspNetCore.Builder;
@@ -30,8 +32,8 @@ namespace HRPotralAPI
         {
             services.AddControllers();
             services.AddTransient<DBManager>();
-            services.AddSingleton<IEmployeeRepository, EmployeeRepository>();
-            services.AddSingleton<IDepartmentRepository, DepartmentRepository>();
+            services.AddSingleton<IRepository<Employee>, EmployeeRepository>();
+            services.AddSingleton<IRepository<Department>, DepartmentRepository>();
         }
 
         // This method gets called by the runtime. Use this method to configure the HTTP request pipeline.
