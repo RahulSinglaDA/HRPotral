@@ -1,5 +1,4 @@
-﻿using HRPotralAPI.Models;
-using HRPotralAPI.Repositories;
+﻿using Helper.Models;
 using Microsoft.AspNetCore.Mvc;
 using System;
 using System.Collections.Generic;
@@ -8,7 +7,7 @@ using System.Threading.Tasks;
 
 // For more information on enabling Web API for empty projects, visit https://go.microsoft.com/fwlink/?LinkID=397860
 
-namespace HRPotralAPI.Controllers
+namespace DepartmentService.Controllers
 {
     [Route("api/[controller]")]
     [ApiController]

@@ -1,11 +1,11 @@
-﻿using HRPotralAPI.DBManagers;
-using HRPotralAPI.Models;
+﻿using Helper;
+using Helper.Models;
 using System;
 using System.Collections.Generic;
 using System.Linq;
 using System.Threading.Tasks;
 
-namespace HRPotralAPI.Repositories.DepartmentRepository
+namespace DepartmentService
 {
     public class DepartmentRepository : IRepository<Department>
     {

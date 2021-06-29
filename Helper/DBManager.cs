@@ -1,4 +1,4 @@
-﻿using HRPotralAPI.Models;
+﻿using Helper.Models;
 using Microsoft.EntityFrameworkCore;
 using System;
 using System.Collections.Generic;
@@ -8,7 +8,7 @@ using System.Reflection;
 using System.Threading.Tasks;
 
 
-namespace HRPotralAPI.DBManagers
+namespace Helper
 {
     public class DBManager : DbContext
     {
@@ -26,7 +26,8 @@ namespace HRPotralAPI.DBManagers
         public DbSet<Department> Departments { get; set; }
         protected override void OnConfiguring(DbContextOptionsBuilder options)
         {
-            var dbPath = Path.GetDirectoryName(Assembly.GetExecutingAssembly().Location) + @"\myDB.db";
+            DirectoryInfo d = new DirectoryInfo(Path.GetDirectoryName(Assembly.GetExecutingAssembly().Location));
+            var dbPath = d.Parent.Parent.Parent.Parent + @"\myDB.db";
             options.UseSqlite($"Data Source={dbPath}");
         }
     }

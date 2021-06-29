@@ -1,6 +1,5 @@
-﻿using HRPotralAPI.Mediator;
-using HRPotralAPI.Models;
-using HRPotralAPI.Repositories;
+﻿using Helper.Mediator;
+using Helper.Models;
 using Microsoft.AspNetCore.Mvc;
 using System;
 using System.Collections.Generic;
@@ -8,7 +7,7 @@ using System.Linq;
 using System.Threading.Tasks;
 
 
-namespace HRPotralAPI.Controllers
+namespace EmployeeService.Controllers
 {
     [Route("api/[controller]")]
     [ApiController]

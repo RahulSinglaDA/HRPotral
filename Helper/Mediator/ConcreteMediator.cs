@@ -1,10 +1,10 @@
-﻿using HRPotralAPI.Models;
+﻿using Helper.Models;
 using System;
 using System.Collections.Generic;
 using System.Linq;
 using System.Threading.Tasks;
 
-namespace HRPotralAPI.Mediator
+namespace Helper.Mediator
 {
 
     public class ConcreteMediator : IMediator

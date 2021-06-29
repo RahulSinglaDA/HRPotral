@@ -7,7 +7,7 @@ using System.Collections.Generic;
 using System.Linq;
 using System.Threading.Tasks;
 
-namespace HRPotralAPI
+namespace DepartmentService
 {
     public class Program
     {

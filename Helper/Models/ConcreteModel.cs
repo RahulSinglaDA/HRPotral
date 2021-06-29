@@ -1,10 +1,10 @@
-﻿using HRPotralAPI.Mediator;
+﻿using Helper.Mediator;
 using System;
 using System.Collections.Generic;
 using System.Linq;
 using System.Threading.Tasks;
 
-namespace HRPotralAPI.Models
+namespace Helper.Models
 {
     public abstract class ConcreteModel
     {

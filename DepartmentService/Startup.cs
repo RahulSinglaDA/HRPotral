@@ -1,8 +1,5 @@
-using HRPotralAPI.DBManagers;
-using HRPotralAPI.Models;
-using HRPotralAPI.Repositories;
-using HRPotralAPI.Repositories.DepartmentRepository;
-using HRPotralAPI.Repositories.EmployeeRepository;
+using Helper;
+using Helper.Models;
 using Microsoft.AspNetCore.Builder;
 using Microsoft.AspNetCore.Hosting;
 using Microsoft.AspNetCore.HttpsPolicy;
@@ -16,7 +13,7 @@ using System.Collections.Generic;
 using System.Linq;
 using System.Threading.Tasks;
 
-namespace HRPotralAPI
+namespace DepartmentService
 {
     public class Startup
     {
@@ -32,9 +29,7 @@ namespace HRPotralAPI
         {
             services.AddControllers();
             services.AddTransient<DBManager>();
-            services.AddSingleton<IRepository<Employee>, EmployeeRepository>();
             services.AddSingleton<IRepository<Department>, DepartmentRepository>();
-            services.AddSwaggerGen();
         }
 
         // This method gets called by the runtime. Use this method to configure the HTTP request pipeline.
@@ -44,14 +39,8 @@ namespace HRPotralAPI
             {
                 app.UseDeveloperExceptionPage();
             }
-           
-            app.UseHttpsRedirection();
 
-            app.UseSwagger();
-            app.UseSwaggerUI(c =>
-            {
-                c.SwaggerEndpoint("/swagger/v1/swagger.json", "My API V1");
-            });
+            app.UseHttpsRedirection();
 
             app.UseRouting();
 
