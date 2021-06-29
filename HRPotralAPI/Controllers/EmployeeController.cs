@@ -1,4 +1,5 @@
-﻿using HRPotralAPI.Models;
+﻿using HRPotralAPI.Mediator;
+using HRPotralAPI.Models;
 using HRPotralAPI.Repositories;
 using Microsoft.AspNetCore.Mvc;
 using System;
@@ -23,6 +24,11 @@ namespace HRPotralAPI.Controllers
         [HttpGet]
         public IEnumerable<Employee> Get()
         {
+            System.Diagnostics.Debug.WriteLine("Welcome");
+            ConcreteMediator.Instance.emp = new Employee(ConcreteMediator.Instance);
+            ConcreteMediator.Instance.dep = new Department(ConcreteMediator.Instance);
+            ConcreteMediator.Instance.emp.Send();
+
             return empRep.GetAll();
         }
 
