@@ -1,3 +1,5 @@
+using DepartmentService;
+using DepartmentService.Controllers;
 using EmployeeService;
 using EmployeeService.Controllers;
 using Helper.Models;
@@ -26,7 +28,7 @@ namespace TestAPI
 
         [Theory]
         [InlineData(1)]
-        public void Task_GetEmployeeById_Return_OkResult(int id)
+        public void Task_GetEmployeeById_Return_Employee(int id)
         {
             //Arrange  
             var controller = new EmployeeController(new EmployeeRepository(new Helper.DBManager()));
@@ -57,6 +59,22 @@ namespace TestAPI
         {
             yield return new Object[] {new OkResult().StatusCode, new Employee { EmployeeID = 4, EmployeeName = "Rahul1", EmployeeEmail = "abcd@gmail.com", EmployeePhone = 123, DepartmentID = 1 } };
             yield return new object[] {new OkResult().StatusCode, new Employee { EmployeeID = 5, EmployeeName = "Rahul3", EmployeeEmail = "abcd3@gmail.com", EmployeePhone = 3123, DepartmentID = 1 } };
+        }
+
+
+
+        [Theory]
+        [InlineData(1)]
+        public void Task_GetDepartmentById_Return_Department(int id)
+        {
+            //Arrange  
+            var controller = new DepartmentController(new DepartmentRepository(new Helper.DBManager()));
+
+            //Act  
+            var data = controller.Get(id);
+
+            //Assert  
+            Assert.IsType<Department>(data);
         }
     }
 }
