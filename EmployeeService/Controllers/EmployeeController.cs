@@ -40,9 +40,10 @@ namespace EmployeeService.Controllers
 
         // POST api/<EmployeeController>
         [HttpPost]
-        public void Post(Employee emp)
+        public OkResult Post(Employee emp)
         {
             empRep.Add(emp);
+            return new OkResult();
         }
 
         // PUT api/<EmployeeController>/5
