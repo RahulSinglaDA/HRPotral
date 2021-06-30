@@ -66,14 +66,11 @@ namespace TestAPI
         [Theory]
         [InlineData(1)]
         public void Task_GetDepartmentById_Return_Department(int id)
-        {
-            //Arrange  
+        {  
             var controller = new DepartmentController(new DepartmentRepository(new Helper.DBManager()));
-
-            //Act  
+ 
             var data = controller.Get(id);
-
-            //Assert  
+ 
             Assert.IsType<Department>(data);
         }
     }
