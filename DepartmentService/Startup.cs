@@ -1,5 +1,7 @@
+using GreenPipes;
 using Helper;
 using Helper.Models;
+using MassTransit;
 using Microsoft.AspNetCore.Builder;
 using Microsoft.AspNetCore.Hosting;
 using Microsoft.AspNetCore.HttpsPolicy;
@@ -27,6 +29,26 @@ namespace DepartmentService
         // This method gets called by the runtime. Use this method to add services to the container.
         public void ConfigureServices(IServiceCollection services)
         {
+            services.AddMassTransit(x =>
+            {
+                x.AddConsumer<EmployeeConsumer>();
+
+                x.AddBus(provider => Bus.Factory.CreateUsingRabbitMq(cfg =>
+                {
+                    cfg.Host("rabbitmq://localhost");
+
+                    cfg.ReceiveEndpoint("employee_queue", ep =>
+                    {
+                        ep.PrefetchCount = 16;
+                        ep.UseMessageRetry(r => r.Interval(2, 100));
+
+                        ep.ConfigureConsumer<EmployeeConsumer>(provider);
+                    });
+                }));
+            });
+
+            services.AddMassTransitHostedService();
+
             services.AddControllers();
             services.AddTransient<DBManager>();
             services.AddSingleton<IRepository<Department>, DepartmentRepository>();

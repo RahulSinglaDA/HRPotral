@@ -1,5 +1,6 @@
 using Helper;
 using Helper.Models;
+using MassTransit;
 using Microsoft.AspNetCore.Builder;
 using Microsoft.AspNetCore.Hosting;
 using Microsoft.AspNetCore.HttpsPolicy;
@@ -27,9 +28,19 @@ namespace EmployeeService
         // This method gets called by the runtime. Use this method to add services to the container.
         public void ConfigureServices(IServiceCollection services)
         {
+            services.AddMassTransit(x =>
+            {
+                x.AddBus(provider => Bus.Factory.CreateUsingRabbitMq(cfg =>
+                {
+                    cfg.Host("rabbitmq://localhost");
+                }));
+            });
+
+            services.AddMassTransitHostedService();
             services.AddControllers();
             services.AddTransient<DBManager>();
             services.AddSingleton<IRepository<Employee>, EmployeeRepository>();
+            services.AddSwaggerGen();
         }
 
         // This method gets called by the runtime. Use this method to configure the HTTP request pipeline.
@@ -45,6 +56,12 @@ namespace EmployeeService
             app.UseRouting();
 
             app.UseAuthorization();
+
+            app.UseSwagger();
+            app.UseSwaggerUI(c =>
+            {
+                c.SwaggerEndpoint("/swagger/v1/swagger.json", "Employee Service");
+            });
 
             app.UseEndpoints(endpoints =>
             {

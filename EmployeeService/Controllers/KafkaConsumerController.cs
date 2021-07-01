@@ -29,7 +29,7 @@ namespace EmployeeService.Controllers
             {
                 message = Encoding.UTF8.GetString(messages.Value);
                 System.Diagnostics.Debug.WriteLine(message);
-                //return Ok(message);
+                return Ok(message);
             }
             return Ok(message);
         }
