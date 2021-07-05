@@ -5,6 +5,7 @@ using EmployeeService.Controllers;
 using Helper.Models;
 using Microsoft.AspNetCore.Mvc;
 using System;
+using System.Threading.Tasks;
 using Xunit;
 
 namespace TestAPI
@@ -31,10 +32,10 @@ namespace TestAPI
         public void Task_GetEmployeeById_Return_Employee(int id)
         {
             //Arrange  
-            var controller = new EmployeeController(new EmployeeRepository(new Helper.DBManager()));
+            var controller = new EmployeeController();
 
             //Act  
-            var data = controller.Get(id);
+            var data = controller.GetAsync(id);
 
             //Assert  
             Assert.IsType<Employee>(data);
@@ -45,12 +46,12 @@ namespace TestAPI
         public void Task_PostEmployee_Return_OkResult(int expected,params Employee[] values)
         {
             //Arrange  
-            var controller = new EmployeeController(new EmployeeRepository(new Helper.DBManager()));
+            var controller = new EmployeeController();
 
             foreach(Employee val in values)
             {
-                var data = controller.Post(val);
-                Assert.Equal(expected, data.StatusCode);
+                var data = controller.PostAsync(val);
+                Assert.Equal(expected, data.Result.StatusCode);
             }
             
         }

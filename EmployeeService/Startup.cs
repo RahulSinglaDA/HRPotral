@@ -1,6 +1,7 @@
 using Helper;
 using Helper.Handlers;
 using Helper.Models;
+using Helper.Repositories;
 using MassTransit;
 using MediatR;
 using Microsoft.AspNetCore.Builder;

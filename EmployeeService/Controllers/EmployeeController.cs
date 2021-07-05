@@ -17,12 +17,10 @@ namespace EmployeeService.Controllers
     [ApiController]
     public class EmployeeController : ControllerBase
     {
-        private IRepository<Employee> empRep;
         private readonly IMediator mediator;
 
-        public EmployeeController(IRepository<Employee> employeeRepository, IMediator mediator=null)
+        public EmployeeController(IMediator mediator=null)
         {
-            empRep = employeeRepository;
             this.mediator = mediator;
         }
 
@@ -35,38 +33,52 @@ namespace EmployeeService.Controllers
             ConcreteMediator.Instance.dep = new Department(ConcreteMediator.Instance);
             ConcreteMediator.Instance.emp.Send();
             Request<Employee> res = new Request<Employee>();
-            res.Type = RequestType.Get;
+            res.Type = RequestType.GetAll;
             Response<Employee> empRes = await mediator.Send(res);
             return (IEnumerable<Employee>)empRes.Entity;
         }
 
         // GET api/<EmployeeController>/5
         [HttpGet("{id}")]
-        public Employee Get(int id)
+        public async Task<Employee> GetAsync(int id)
         {
-            return empRep.Get(id);
+            Request<Employee> res = new Request<Employee>();
+            res.Type = RequestType.Get;
+            res.ID = id;
+            Response<Employee> empRes = await mediator.Send(res);
+            return (Employee)empRes.Entity;
         }
 
         // POST api/<EmployeeController>
         [HttpPost]
-        public OkResult Post(Employee emp)
+        public async Task<OkResult> PostAsync(Employee emp)
         {
-            empRep.Add(emp);
+            Request<Employee> res = new Request<Employee>();
+            res.Type = RequestType.Add;
+            res.Entity = emp;
+            Response<Employee> empRes = await mediator.Send(res);
             return new OkResult();
         }
 
-        // PUT api/<EmployeeController>/5
+        //PUT api/<EmployeeController>/5
         [HttpPut("{id}")]
-        public void Put(int id, Employee emp)
+        public async Task PutAsync(int id, Employee emp)
         {
-            empRep.Update(id, emp);
+            Request<Employee> res = new Request<Employee>();
+            res.Type = RequestType.Update;
+            res.ID = id;
+            res.Entity = emp;
+            Response<Employee> empRes = await mediator.Send(res);
         }
 
         // DELETE api/<EmployeeController>/5
         [HttpDelete("{id}")]
-        public void Delete(int id)
+        public async Task DeleteAsync(int id)
         {
-            empRep.Delete(id);
+            Request<Employee> res = new Request<Employee>();
+            res.Type = RequestType.Delete;
+            res.ID = id;
+            Response<Employee> empRes = await mediator.Send(res);
         }
     }
 }

@@ -10,6 +10,7 @@ namespace Helper.mediatr
     {
         public RequestType Type { get; set; }
 
+        public int ID { get; set; }
         public T Entity { get; set; }
     }
 }
