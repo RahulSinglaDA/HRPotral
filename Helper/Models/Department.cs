@@ -9,7 +9,7 @@ namespace Helper.Models
     public class Department : ConcreteModel
     {
         public Department() { }
-        public Department(IMediator mediator) : base(mediator) { }
+        public Department(IMediatorC mediator) : base(mediator) { }
         public int DepartmentID { get; set; }
         public string DepartmentName { get; set; }
         public ICollection<Employee> Employees { get; set; }

@@ -7,7 +7,7 @@ using System.Threading.Tasks;
 namespace Helper.Mediator
 {
 
-    public class ConcreteMediator : IMediator
+    public class ConcreteMediator : IMediatorC
     {
         public Employee emp;
         public Department dep;

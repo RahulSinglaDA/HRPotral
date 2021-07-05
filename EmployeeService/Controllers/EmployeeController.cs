@@ -1,5 +1,9 @@
-﻿using Helper.Mediator;
+﻿using Helper;
+using Helper.Enums;
+using Helper.Mediator;
+using Helper.mediatr;
 using Helper.Models;
+using MediatR;
 using Microsoft.AspNetCore.Mvc;
 using System;
 using System.Collections.Generic;
@@ -14,21 +18,26 @@ namespace EmployeeService.Controllers
     public class EmployeeController : ControllerBase
     {
         private IRepository<Employee> empRep;
-        public EmployeeController(IRepository<Employee> employeeRepository)
+        private readonly IMediator mediator;
+
+        public EmployeeController(IRepository<Employee> employeeRepository, IMediator mediator=null)
         {
             empRep = employeeRepository;
+            this.mediator = mediator;
         }
 
         // GET: api/<EmployeeController>
         [HttpGet]
-        public IEnumerable<Employee> Get()
+        public async Task<IEnumerable<Employee>> Get()
         {
             System.Diagnostics.Debug.WriteLine("Welcome");
             ConcreteMediator.Instance.emp = new Employee(ConcreteMediator.Instance);
             ConcreteMediator.Instance.dep = new Department(ConcreteMediator.Instance);
             ConcreteMediator.Instance.emp.Send();
-
-            return empRep.GetAll();
+            Request<Employee> res = new Request<Employee>();
+            res.Type = RequestType.Get;
+            Response<Employee> empRes = await mediator.Send(res);
+            return (IEnumerable<Employee>)empRes.Entity;
         }
 
         // GET api/<EmployeeController>/5

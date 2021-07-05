@@ -8,9 +8,9 @@ namespace Helper.Models
 {
     public abstract class ConcreteModel
     {
-        public IMediator mediator;
+        public IMediatorC mediator;
         public ConcreteModel() { }
-        public ConcreteModel(IMediator mediator)
+        public ConcreteModel(IMediatorC mediator)
         {
             this.mediator = mediator;
         }

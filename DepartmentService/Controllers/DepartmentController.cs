@@ -1,4 +1,5 @@
-﻿using Helper.Models;
+﻿using Helper;
+using Helper.Models;
 using Microsoft.AspNetCore.Mvc;
 using System;
 using System.Collections.Generic;

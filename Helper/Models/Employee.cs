@@ -9,7 +9,7 @@ namespace Helper.Models
     public class Employee : ConcreteModel
     {
         public Employee() { }
-        public Employee(IMediator mediator) : base(mediator) { }
+        public Employee(IMediatorC mediator) : base(mediator) { }
         public int EmployeeID { get; set; }
         public string EmployeeName { get; set; }
         public string EmployeeEmail { get; set; }
