@@ -1,5 +1,8 @@
 ﻿using Helper;
+using Helper.Enums;
+using Helper.mediatr;
 using Helper.Models;
+using MediatR;
 using Microsoft.AspNetCore.Mvc;
 using System;
 using System.Collections.Generic;
@@ -14,46 +17,63 @@ namespace DepartmentService.Controllers
     [ApiController]
     public class DepartmentController : ControllerBase
     {
+        private readonly IMediator mediator;
 
-        private IRepository<Department> depRep;
-        public DepartmentController(IRepository<Department> departmentRepository)
+        public DepartmentController(IMediator mediator = null)
         {
-            depRep = departmentRepository;
+            this.mediator = mediator;
         }
-
         // GET: api/<DepartmentController>
         [HttpGet]
-        public IEnumerable<Department> Get()
+        public async Task<IEnumerable<Department>> GetAsync()
         {
-            return depRep.GetAll();
+            Request<Department> res = new Request<Department>();
+            res.Type = RequestType.GetAll;
+            Response<Department> empRes = await mediator.Send(res);
+            return (IEnumerable<Department>)empRes.Entity;
         }
 
         // GET api/<DepartmentController>/5
         [HttpGet("{id}")]
-        public Department Get(int id)
+        public async Task<Department> GetAsync(int id)
         {
-            return depRep.Get(id);
+            Request<Department> res = new Request<Department>();
+            res.Type = RequestType.Get;
+            res.ID = id;
+            Response<Department> empRes = await mediator.Send(res);
+            return (Department)empRes.Entity;
         }
 
         // POST api/<DepartmentController>
         [HttpPost]
-        public void Post([FromBody] Department dep)
+        public async Task<OkResult> PostAsync([FromBody] Department dep)
         {
-            depRep.Add(dep);
+            Request<Department> res = new Request<Department>();
+            res.Type = RequestType.Add;
+            res.Entity = dep;
+            Response<Department> empRes = await mediator.Send(res);
+            return new OkResult();
         }
 
         // PUT api/<DepartmentController>/5
         [HttpPut("{id}")]
-        public void Put(int id, [FromBody] Department dep)
+        public async Task PutAsync(int id, [FromBody] Department dep)
         {
-            depRep.Update(id, dep);
+            Request<Department> res = new Request<Department>();
+            res.Type = RequestType.Update;
+            res.ID = id;
+            res.Entity = dep;
+            Response<Department> empRes = await mediator.Send(res);
         }
 
         // DELETE api/<DepartmentController>/5
         [HttpDelete("{id}")]
-        public void Delete(int id)
+        public async Task DeleteAsync(int id)
         {
-            depRep.Delete(id);
+            Request<Department> res = new Request<Department>();
+            res.Type = RequestType.Delete;
+            res.ID = id;
+            Response<Department> empRes = await mediator.Send(res);
         }
     }
 }

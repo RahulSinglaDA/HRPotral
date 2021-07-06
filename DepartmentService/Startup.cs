@@ -1,7 +1,10 @@
 using GreenPipes;
 using Helper;
+using Helper.Handlers;
 using Helper.Models;
+using Helper.Repositories;
 using MassTransit;
+using MediatR;
 using Microsoft.AspNetCore.Builder;
 using Microsoft.AspNetCore.Hosting;
 using Microsoft.AspNetCore.HttpsPolicy;
@@ -52,6 +55,8 @@ namespace DepartmentService
             services.AddControllers();
             services.AddTransient<DBManager>();
             services.AddSingleton<IRepository<Department>, DepartmentRepository>();
+            services.AddMediatR(typeof(Startup));
+            services.AddMediatR(typeof(DepartmentRequestHandler));
         }
 
         // This method gets called by the runtime. Use this method to configure the HTTP request pipeline.

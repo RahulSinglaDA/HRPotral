@@ -69,9 +69,9 @@ namespace TestAPI
         [InlineData(1)]
         public void Task_GetDepartmentById_Return_Department(int id)
         {  
-            var controller = new DepartmentController(new DepartmentRepository(new Helper.DBManager()));
+            var controller = new DepartmentController();
  
-            var data = controller.Get(id);
+            var data = controller.GetAsync(id);
  
             Assert.IsType<Department>(data);
         }

@@ -32,7 +32,7 @@ namespace EmployeeService.Controllers
             ConcreteMediator.Instance.emp = new Employee(ConcreteMediator.Instance);
             ConcreteMediator.Instance.dep = new Department(ConcreteMediator.Instance);
             ConcreteMediator.Instance.emp.Send();
-            Request<Employee> res = new Request<Employee>();
+            Request<Employee> res = Request<Employee>.CreateRequest();
             res.Type = RequestType.GetAll;
             Response<Employee> empRes = await mediator.Send(res);
             return (IEnumerable<Employee>)empRes.Entity;

@@ -1,15 +1,12 @@
 ﻿using Helper;
-using Helper.Enums;
+using Helper.Handlers;
 using Helper.mediatr;
 using Helper.Models;
 using MediatR;
-using System;
-using System.Collections.Generic;
-using System.Text;
 using System.Threading;
 using System.Threading.Tasks;
 
-namespace Helper.Handlers
+namespace EmployeeService
 {
     public class EmployeeRequestHandler : IRequestHandler<Request<Employee>, Response<Employee>>
     {

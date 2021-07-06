@@ -5,7 +5,7 @@ using System.Collections.Generic;
 using System.Linq;
 using System.Threading.Tasks;
 
-namespace DepartmentService
+namespace Helper.Repositories
 {
     public class DepartmentRepository : IRepository<Department>
     {

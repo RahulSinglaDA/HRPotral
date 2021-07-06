@@ -12,5 +12,10 @@ namespace Helper.mediatr
 
         public int ID { get; set; }
         public T Entity { get; set; }
+
+        public static Request<T> CreateRequest()
+        {
+            return new Request<T>();
+        }
     }
 }

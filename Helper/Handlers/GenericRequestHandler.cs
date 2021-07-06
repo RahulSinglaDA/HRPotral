@@ -1,15 +1,11 @@
 ﻿using Helper.Enums;
 using Helper.mediatr;
-using MediatR;
-using System;
-using System.Collections.Generic;
-using System.Text;
 using System.Threading;
 using System.Threading.Tasks;
 
 namespace Helper.Handlers
 {
-    class GenericRequestHandler<T> 
+    public class GenericRequestHandler<T> 
     {
         private readonly IRepository<T> repository;
 
