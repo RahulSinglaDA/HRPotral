@@ -80,5 +80,25 @@ namespace EmployeeService.Controllers
             res.ID = id;
             Response<Employee> empRes = await mediator.Send(res);
         }
+
+        //Example Generic ActionResult
+        [HttpDelete("delete1/{id}")]
+        public async Task<ActionResult<string>> Delete1Async(int id)
+        {
+            try 
+            {
+                Request<Employee> res = new Request<Employee>();
+                res.Type = RequestType.Delete;
+                res.ID = id;
+                Response<Employee> empRes = await mediator.Send(res);
+                return "Deleted";
+            }
+            catch(Exception ex)
+            {
+                return NotFound();
+            }
+            
+
+        }
     }
 }

@@ -40,9 +40,6 @@ namespace EmployeeService
                 }));
             });
 
-            
-            //services.AddMediatR(typeof(Request<Employee>));
-            //services.AddMediatR(typeof(Helper.RequestHandler<Employee>));
             services.AddMassTransitHostedService();
             services.AddControllers();
             services.AddTransient<DBManager>();
@@ -50,14 +47,6 @@ namespace EmployeeService
             services.AddSwaggerGen();
             services.AddMediatR(typeof(Startup));
             services.AddMediatR(typeof(EmployeeRequestHandler));
-            services.AddMediatR(AppDomain.CurrentDomain.GetAssemblies());
-            //var assembly = AppDomain.CurrentDomain.Load("Helper");
-            //services.AddMediatR(assembly);
-            //services.AddMediatR(typeof(Helper.mediatr.Request<>).GetTypeInfo().Assembly);
-            //services.AddMediatR(typeof(Helper.RequestHandler<>).GetTypeInfo().Assembly);
-            //services.AddMediatR(typeof(Request<Employee>));
-            //services.AddMediatR(typeof(Helper.RequestHandler<Employee>));
-            //services.RegisterRequestHandlers();
         }
 
         // This method gets called by the runtime. Use this method to configure the HTTP request pipeline.
@@ -84,16 +73,6 @@ namespace EmployeeService
             {
                 endpoints.MapControllers();
             });
-        }
-    }
-
-    public static class Dependencies
-    {
-        public static IServiceCollection RegisterRequestHandlers(
-            this IServiceCollection services)
-        {
-            return services
-                .AddMediatR(typeof(Dependencies).Assembly);
         }
     }
 }

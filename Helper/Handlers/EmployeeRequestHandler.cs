@@ -22,28 +22,8 @@ namespace Helper.Handlers
 
         public Task<Response<Employee>> Handle(Request<Employee> request, CancellationToken cancellationToken)
         {
-            Response<Employee> res = new Response<Employee>();
-            if (request.Type == RequestType.GetAll)
-            {
-                res.Entity = repository.GetAll();
-            }
-            else if (request.Type == RequestType.Get)
-            {
-                res.Entity = repository.Get(request.ID);
-            }
-            else if (request.Type == RequestType.Add)
-            {
-                repository.Add(request.Entity);
-            }
-            else if (request.Type == RequestType.Update)
-            {
-                repository.Update(request.ID,request.Entity);
-            }
-            else if (request.Type == RequestType.Delete)
-            {
-                repository.Delete(request.ID);
-            }
-            return Task.FromResult(res);
+            GenericRequestHandler<Employee> genericRequestHandler = new GenericRequestHandler<Employee>(repository);
+            return genericRequestHandler.Handle(request, cancellationToken);
         }
     }
 }
